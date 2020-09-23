@@ -1,0 +1,72 @@
+PART 4:
+
+Despite their similar names, they function differently. GetWindowText also uses buffers, so If you haven't been following along go to buffers.txt.
+
+GETWINDOWTEXT:
+
+GetWindowText get the caption of a parent window, not of a child window. (If you don't know what I am talking about read API.txt and FINDWINDOW FINDWINDOWex.txt) Yes, it uses buffers, but they are suprisingly easiy.
+
+
+GetWindowText ByVal hwnd As Long, ByVal lpString As String, ByVal cch As Long
+
+
+Params:
+
+	hWnd:
+	
+	hWnd refers to the Window Handle of the window you want to get the caption. 
+
+	lpString:
+
+	Oh no, buffer time. Ok, just declare a string and * by 256. This the string that will hold the caption for us.
+	
+	Dim sCaption as string * 256
+	
+	cch:
+
+	cch is just the len of the string that you will get, so place 256 there as well :-) Yes, you could use GETWINDOWTEXTLENGTH, but a caption can't exceed 256, so why declare another window api?
+
+EXAMPLE OF GETWINDOWTEXT:
+	
+	Dim lNotepadhWnd as long
+	Dim sCaption as string * 256
+
+	lNotepadhWnd = FindWindow("Notepad",vbnullstring)
+
+	GetWindowText lNotepadHwnd, sCaption, 256
+
+	MSGBOX scaption
+
+//
+	
+
+
+SETWINDOWTEXT:
+
+Sets the caption of a parent hwnd. Very easy to use.
+
+SetWindowText ByVal hwnd As Long, ByVal lpString As String
+
+PARAMS:
+
+	hwnd:
+	
+	hwnd refers to the window handle of the window you want to change
+
+	lpString:
+
+	lpString refers to the string that you want to use as the new caption
+
+EXAMPLE OF SETWINDOWTEXT:
+
+	Dim lNotepadhWnd as long
+	Dim sNotepadText as string
+
+	lNotepadhWnd = FindWindow("Notepad",vbnullstring)	
+
+	sNotepadText = inputbox("What do you want the caption to say?")	
+
+	SETWINDOWTEXT lNotepadhwnd,sNotepadText
+
+
+This is all pretty easy. If you are having trouble, see the example code for acutal usage!

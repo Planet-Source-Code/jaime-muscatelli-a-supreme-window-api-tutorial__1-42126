@@ -1,0 +1,78 @@
+PART 6:
+
+OMGOSH, it is the almighty SENDMESSAGE!!?!@!@
+
+Relax, Send Message is one of my favorite api (especially for C++ programmers because it is used in almost every program they make!). This might be a difficult tutorial, so go grab some food and take a bathroom break. While your at it, open the example code for this so you are not totally lost :-) Also, if you read the API.txt then you heard of my comp-friendly virus lol. Yes, it uses sendmessage to send the text message to the edit window in notepad (remember, setwindowtext gets only parent windows), and that example is with the source, but open the SENDMESSAGE example first. Basically, these next api can all be done with SendMessage using WM_
+
+CloseWindow()
+ShowWindow()
+SetWindowText()
+GetWindowText()
+
+and there are more
+
+SendMessage (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any)
+
+Those params aren't bad are they? Now SendMessage is a favorite because it is used a lot, plus you can customize the api. CUSTOMIZE THE API?!?!?! Is he insane? Well Yes, but not because of that. I will show you ( At the end of this tutorial, and in both examples) how any why this is.
+
+PARAMS:
+
+	hwnd:
+
+	Hwnd is the window you are sending the message to.
+	
+	wMsg:
+	
+	One or more of the WM_  or EM_ constants in the VB dec loader (API viewer)
+
+	wParam:
+
+	There are just too many uses to list examples. This could be any long variable or buffer that is needed.
+
+*( That is what I think is so tricky about SendMEssage is that it has so many WM_ that it can do almost anything to a window. In fact, I think it can!)
+
+	lparam:
+
+	Notice how it is doesn't have a byval and it is declared as any? That is how it is customizeable. I will show you one extremely useful example of this
+
+EXAMPLES of SENDMESSAGE:
+
+	First, we need to change the api. Go to the end, and put ByVal in front of the lparam, and then change any to String. Now go to the actual name (SendMessage) and change it to SendMessageString. I don't know if you have seen this in those huge aol.bas modules that we all at some time have messed with, but that is why it was not in your vb api viewer. Now, as you will see, SendMessageString can both Set (WM_SETTEXT) and Get (WM_GETTEXT) to BOTH a parent and a child window. You might be saying "Well Why did I learn GET and SET WINdowTEXTs?" Well, because Microsoft made it easier for you by not having to use buffers for both like you do with SendMessage! Plus SendMessage is more for c++, but is now widely being used in VB!
+
+	Dim lNotepadHwnd as long
+	Dim lNotepadEdit as long
+	Dim sCaption as string
+	
+	lNotepadHwnd = Findwindow("Notepad",vbnullstring)
+	lNotepadEdit = FindWindowEx(lNotepadHwnd,0&,"Edit",vbnullstring)
+
+	sCaption = InputBox("What do you want the caption to be?")
+	
+	SendMessage lNotepadHwnd, WM_SETTEXT, 256, sCaption '// This will do the same thing as SETWINDOWTEXT
+
+The reason that this did the same thing as setwindowtext is because it sent a message to the parent hwnd (lnotepadHwnd). But we know we can use this to send the same text message to the textbox window (edit) with SendMessage but NOT SETWINDOWCAPTION.
+
+	Dim lNotepadHwnd as long
+	Dim lNotepadEdit as long
+	Dim sCaption as string
+	
+	lNotepadHwnd = Findwindow("Notepad",vbnullstring)
+	lNotepadEdit = FindWindowEx(lNotepadHwnd,0&,"Edit",vbnullstring)
+
+	sCaption = InputBox("What do you want to say?")
+	
+	SendMessage lNotepadEdit, WM_SETTEXT, 256, sCaption
+
+Again, there are so many things on SendMessage I could write a book. But I am going to show you (I did in the example so go to the SendMessageExample) how to get the number of lines in a textbox. Simply use EM_GETLINECOUNT! Now, if you go through most of the consts in vb dec api viewer, most are compatible. Check these out:
+
+	WM_CLOSE  < instead of > CloseWindow()
+	WM_GETTEXT < instead of > GETWINDOWTEXT() **
+	WM_SETTEXT < instead of > SETWINDOWTEXT() **
+	WM_SHOWWINDOW < instead of > ShowWindow(1) **
+	WM_HIDEWINDOW < instead of > ShowWindow(0) **
+
+** I prefer to use these because of their ease and reliability. But then again, it is your call.
+
+
+
+That is the end. Just check out the fake virus code. Please vote for me on PSC, and please email me with any questions, comments, or requests.

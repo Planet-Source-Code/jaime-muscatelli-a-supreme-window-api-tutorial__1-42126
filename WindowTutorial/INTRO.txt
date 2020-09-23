@@ -1,0 +1,65 @@
+BASIC WINDOW API
+
+**** Window Tutorial  1 ****
+
+File Name: WINTUT.zip
+Description: This is a Window API Tutorial
+Copyright: © 2003 Jaime Muscatelli
+File Size:  0
+
+**** Author Information ****
+
+Author: Jaime Muscatelli
+Email: webmaster@jaimemuscatelli.znn.com
+Company: J Productions
+Screen Name: JAIME141974
+Website: www.jprogs.cjb.net
+
+**** ok that is enough of that stuff :-) ****
+
+This tutorial will include:
+	
+	FINDWINDOW()
+	FINDWINDOWEX()
+	GETPARENT()
+	GETWINDOWTEXT()
+	SETWINDOWTEXT()
+	SENDMESSAGE()		<- NO, IT CAN'T BE THE ALMIGHTS SENDMESSAGE()!
+
+What should you have a good handle on?
+
+	VB SYNTAX
+	VB Environment
+	VB API VIEWER
+	API SPY PROGRAM (I made one on PSC, search for WINDOW HANDLE GRABBER)
+
+
+**** FILE DESCRIPTIONS **** 
+
+INTRO.txt < - Take a guess :-)
+API.txt < - Intro to How the WIndow API work, and The window parent/child system, Essential to understand!
+BUFFERS.txt <- Essential to undertand, make sure you read this! (Buffers/Pointers)
+
+The rest of the text files are specific tutorials that coincide with their titles. 
+
+FINDWINDOW & FINDWINDOWEX < - Tutorial for those API
+GETPARENT < - TUTORIAL FOR THAT API
+GETWINDOWTEXT & SETWINDOWTEXT < - TUTORIAL FOR THOSE API
+SENDMESSAGE < - TUTORIAL FOR THAT API  (Are you scared yet?)
+
+**** LAST STUFF ****
+
+I have included source code examples for each API, and I have also separated each tutorial so you can get an Idea of what is going on.
+
+
+You can chose any tutorial at any time and not be lost, but I suggest you stay with me:
+	1	BUFFERS.txt
+	2	API.txt
+	3	FINDWINDOW & FINDWINDOWEX.txt
+	4	GETWINDOWTEXT & SETWINDOWTEXT.txt
+	5	GETPARENT.txt
+	6	SENDMESSAGE.txt
+
+		
+
+

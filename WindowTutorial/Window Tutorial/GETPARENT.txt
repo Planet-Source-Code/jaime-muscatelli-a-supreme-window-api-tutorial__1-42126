@@ -1,0 +1,28 @@
+PART 5:
+
+GETPARENT:
+
+This is so easy it is not even funny. It does exactly what it says it does, it gets the parent of a hwnd that you specify. By now,( if you followed along), you can tell what this could be used for etc. You would mostly use this api with WINDOWFROMPOINT(), which makes a window from the specified x and y values. The windowfrompoint and getparent apis are what makes up an API SPY. HOWEVER, get parent gets the DIRECT PARENT of the window, not the top most window.
+
+SO if I had FOUR windows, and I got the parent of WINDOW 4, the result would be window 3, not window 1. You have to manually (arrays) go through each window, BUT THAT IS WHAT AN API SPY DOES FOR YOU!
+
+
+GetParent (ByVal hwnd As Long) 
+
+
+PARAMS:
+
+	hwnd:
+
+	The hwnd that you want the parent of.
+
+EXAMPLE OF GETPARENT:
+
+DIm lHwnd as long
+Dim lParentHwnd as long
+
+lhwnd = WINDOWFROMPOINT(x,y)
+
+lparentHwnd = getparent(lhwnd)
+
+That is it. This is the easiest API you will see. If you want a tutorial on WINDOWFROMPOINT, email me and I will make one for you. Plus, download my API SPY source from Planet source code. (Search for A WINDOW HANDLE GRABBER (a.k.a. API SPY) to see these in action

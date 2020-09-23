@@ -1,0 +1,53 @@
+PART 1:
+INTRO TO BUFFERS
+
+Buffers (simplified) are actually pointers to data that you need to obtain. In other words, you create a variable that has no data (except for empty space) that the specific API will use to store the data into.
+
+There are two common ways to declare buffers (or pointers, however you want to refer to them :-) )
+
+Example 1:
+
+	Dim sUserName as string * 256
+
+
+Example 2:
+
+	Dim sUserName as string
+	sUserName = Space(256)
+
+
+
+Haven't we all seen that before and were simply dumb-founded? That is telling that string to be able to store 256 characters. If you are wondering, you can also declare number variables. 
+
+Example 1:
+
+	Dim lAccountNumber as long
+
+Wait a minute, why isn' that confusing? That is because it does not need a pre-determined amount of space like strings do. Aren't longs and Integers fun!
+
+
+*(What is up with the 255 and 256?)
+
+255 is the default and max string for windows (for things like window captions etc, not text boxes) If you were to open the VB API VIEWER and go to Constansts, if you typed MAX_STRING, then it would be declared as 255. 
+
+256 is the same, but it is wise to use 256 with buffers because it requires 1 byte (character) to initialize, so it gives the string 255, instead of 254 like 255 does.
+
+
+The cardinal mistake with buffers can be made when you assign them data!!!! If you are confused, look at the two examples below the right way to use buffers, and the wrong way to use buffers
+
+RIGHT WAY:
+
+	Dim sDirectory as String * 256
+	
+	GetWindowsDirectory sDirectory, 256
+
+WRONG WAY:
+
+	DIm sDirectory as string * 256
+
+	sDirectory = GetWindowsDirectory(sDirectory,256)
+
+If you are still lost, then I suggest you either read this over, continue on and it will come to you with practice, or find some 30000000 tutorial that speaks about everything under the sun and buffers :-)
+
+
+

@@ -1,0 +1,47 @@
+PART 2:
+
+API
+
+If you have ever looked at advanced window api projects, you have seen this hwnd keyword. hwnd Stands for window handle. All windows have them. They are comprised both the classname (which all windows have), and captions (which some windows don't). 
+Examples of a hwnd:
+
+Me.hWnd
+Text1.hWnd
+
+Those are nice and cute hwnds because they are already pre-defined (They already are made and accessable)
+
+But what about the window handle (hWnd) to let's say Notepad?
+
+It would look something like this:
+
+	Dim lNotePadhWnd as long
+	
+	lNotepadhWnd = FindWindow("Notepad",vbnullstring)
+
+WOAH, slow down there Jaime. I am sorry, I like to get ahead of myself. First we declared a long variable. All window handles are longs, always!!! (Unless in c++, where they have a HWND identifier, but don't worry about that). What we did here was obtain the window handle by using the FINDWINDOW() api. I will get into FINDWINDOW() along with all of the other API its appropriate tutorial. All we need to know right now is that lNotePadhWnd is now a window handle
+
+AH API, you've got to love it. Here are the API we will use today:
+
+	FINDWINDOW() <- Finds a Window
+	FINDWINDOWEX() <- Finds a Window Within a Window (For multiple hWnds (Like a Handle to a textbox)
+	GETPARENT() <- Gets the parent window handle
+	GETWINDOWTEXT() <- Gets the window caption
+	SETWINDOWTEXT() <- Sets the window caption
+	SENDMESSAGE()   <- NO, IT CAN'T BE THE ALMIGHTS SENDMESSAGE()! Sends a message (one of the WM_ constansts)
+
+
+I will now give you a basic breakdown of how the parent/child window system works. If you know this, feel free to skip it. Now each window obviously has a window handle right? Right. Now, when a window is inside of another window (such as a textbox on a form), you can't just go to the textbox hwnd, you would need to go to all of the parent windows, which in our case would be the form hwnd then the textbox hwnd. Now, if you are dealing with windows inside of your program, then forget what I just said because VB takes care of that for you. Say you have a Form (FRMMAIN) and a textbox (txtPassword). Since they are in your project, and they are class objects, you can just say txtpassword.hwnd. Now, say you would want to get the text or caption from a window that is not in your program (obviously another program?) That is where what I said earlier comes in...
+
+Ok, you want to annoy your older sibling. You want to (every time they open notepad), change the notepad caption to "How does it feel" and the actual textbox in notepad to always say "I TOLD YOU SO". That would be funny right? Absolutley, and it is harmless to your computer. A Comp-Friendly Virus. What an oxymoron that is! Well in order to get the handle to the textbox in notepad, you have to have the Hwnd to it and its parent (which in this case is the actual notepad window.) Luckly, I know them both by heart ( I should by now!) But if you don't, I suggest you get yourself an API SPY, or basically a window handle grabber. There are tons on Planet Source Code, one of which is mine! I strongly suggest you download one because it will automatically get all of the class names and captions, which make up a hwnd. Even though I am breaking the rules, I will show you now how to obtain the handles to Notepad and its textbox.
+
+	Dim lNotepad as long
+	Dim lEdit as long
+
+	lNotepad = FindWindow("Notepad",vbnullstring)
+	lEdit = FindWindowEx(lNotepad,0&,lEdit,vbnullstring)
+
+If you basically got everything I said, go to the next tutorial, which would be (if you are totally new to this stuff, the FINDWINDOW and FINDWINDOWEX tutorial, but you can go to Any tutorial you want if you want a specific API tutorial :-)
+
+IF you want that pretend virus code, yes, it is in the examples. GEESH
+
+IT IS ESSENTIAL THAT YOU UNDERSTAND FINDWINDOW AND FINDWINDOWEX BECAUSE THEY ARE NEEDED FOR EVERY OTHER API IN THIS TUTORIAL 
