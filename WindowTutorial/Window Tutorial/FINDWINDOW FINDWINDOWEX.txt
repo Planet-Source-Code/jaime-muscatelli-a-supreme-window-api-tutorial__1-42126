@@ -1,0 +1,89 @@
+PART 3:
+
+FINDWINDOW AND FINDWINDOW EX
+
+It is essential that you understand these API, because these are the base for all other window api. Even if you know them, I suggest you skim this file.
+
+The FINDWINDOW and FINDWINDOWEX (as you saw in API.TXT) are the two api that get the window handle for you.
+
+FINDWINDOW:
+
+FindWindow (ByVal lpClassName As String, ByVal lpWindowName As String)
+
+Now, I briefly went over these in API.txt, but I will now go over their usage as well.
+
+PARAMS:
+
+	CLASS NAME:
+Now, the lpClassName refers to a Class Name, which is basically which type of window it is, or a specific window type. An example would be "Notepad" for notepad, or "OpusApp" for word. Every window has a class name, every window!!!! Now, how do you get the class Name? Well, you need an API Spy.
+
+
+	API SPY:
+*(What is an API Spy) An API Spy is a program that will get the class names and window captions for all windows that are specified. Where can I get one? I have made one, and I put it on Planet source code. Search for WINDOW HANDLE GRABBER. There are other (and more advanced) versions, but mine is very easy to follow and use. 
+:: DOWNLOAD ONE IF YOU DONT HAVE ON!::
+
+
+	WINDOW NAME:
+
+lpWindowName refers to a window name, or simply it's caption. This window's caption (If you opened this in notepad) is probably "FINDWINDOW FINDWINDOWEX - Notepad". Not all windows have captions (Only parents do!) Now you will notice in some of my examples I use vbullstring for this param. This is because, especially in notepad, the caption changes, so if you left the caption you have on now, and then you opened another document, the caption will change, and the findwindow api will not find the window with the notepad class and the caption "FINDWINDOW FINDWINDOWEX - Notepad"! But if you use vbnullstring, you are safe because it will find all windows with a class called notepad (All notepad windows :-) )
+
+
+You would only use FINDWINDOW to find the Parent (or top most) window handle (hwnd). So you wouldn't use findwindow to find a textbox, because the textbox obviously has an parent window. The trouble is that there can be up to 255 (theres that number again!) windows inside of a window, so you can have 254 picture boxes on a vb form, and if you wanted to get the handle to the very bottom picture box, you're going to need to declare all of the previous windows. Now, you only use findwindow once, and then FINDWINDOWEX for the rest of the windows.
+
+	EXAMPLE OF FINDWINDOW:
+
+	DIm lNotepadhWnd as long
+	
+	lNotepadhWnd = FindWindow("Notepad",vbnullstring)
+
+//
+
+FINDWINDOWEX:
+
+PARAMS:
+
+FindWindowEx (ByVal hWnd1 As Long, ByVal hWnd2 As Long, ByVal lpsz1 As String, ByVal lpsz2 As String)
+
+
+FindWindowEx has some more params because it is used to find only child windows, and not parent hwnds. So you WOULD NOT WOULD NOT WOULD NOT seee
+
+	DIm lNotepadHwnd as long
+
+	lNotepadHwnd = FINDWINDOWEX( BLA BLA BLA)
+
+THAT IS WRONG!!!!!!!!
+
+Sorry, but that is the biggest mistake I see in newbie api programmers. However, you would use it to find the textbox window handle in the notepad window.
+
+First, lets take a look at the params
+
+	hWnd1:
+
+	hWnd1 refers to the direct parent of the window you are trying to find at the moment. So if you were trying to find the textbox for notepad, you would use the notepad hwnd there. I will show you an example in a sec.
+
+	hWnd2:
+
+	hWnd2 is never really used. I have been programming for 4 years, and have professional friends that have for years, and have never used this param. Not to say it is never used, but it won't be in this tutorial or in most projects you see so don't worry about it. Always Set it to 0& !!!
+
+	lpsz1:
+
+	lpsz1 refers to the classname of the current window you are trying to find. So in our example (notepad), the textbox that I am typing in right now is called "Edit". 90% of the textboxes you see are "Edit", yet rich textboxes are not "Edit" There is no need to sweat class names because an API SPY gets them for you!
+
+	lpsz2:
+
+	lpsz2 refers to the caption of the window you are trying to get. You would only use this with MDI programs, because they are the only child windows that have captions. If you aren't useing this for a child window, set it to vbnullstring.
+
+EXAMPLE OF FINDWINDOWEX:
+
+	Dim lNotepadhWnd as long
+	Dim lNotepadEdit as long
+
+	lNotepadhWnd = FindWindow("Notepad",vbnullstring)
+
+	lNotepadEdit = FindWindowEx(lNotepadhWnd,0&,"Edit",vbnullstring)
+
+//
+
+OK, that was hard wasn't it? If you are wondering how you would (like in that fake virus I spoke about in API.txt) get the text of the edit window, you would have to you SendMessage, but that should be saved for last! Remember, you can't get the text of a non-parent hwnd with GetWindowText (GWT is only for Parent Hwnds, Don't we all hate our parents sometimes?) !!!   
+
+OK, you can basically go to any text file in my tutorial, but I suggest you stay with me and go to GETWINDOWTEXT and SETWINDOETEXT.
